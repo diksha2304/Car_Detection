@@ -91,7 +91,7 @@ def main():
                     for key in d_1.keys():
                         if pred_labels_1[0] == key:
                             st.write('**Serverity   :**',d_1[key])
-                    st.write(**"Severity assessment complete."**)
+                    st.write('**Severity assessment complete.**')
         progress_bar.progress(100)
   else:
     st.warning('Please upload an image.')
