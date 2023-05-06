@@ -74,13 +74,13 @@ def main():
              st.write("Are you sure that your car is damaged? Please submit another picture of the damage.")
              st.write("Hint: Try zooming in/out, using a different angle or different lighting")    
         else:
-             st.write('**Status :   ✅**')
+             st.write('**Status :   Damage✅**')
              result1=predictimage(uploaded_file, model_location, threshold)
              pred_labels = np.argmax(result1, axis=1)
              d = {0:'Front', 1:'Rear', 2:'Side'}
              for key in d.keys():
                 if pred_labels[0] == key:
-                    st.write('**Location :   **',d[key])
+                    st.write('**Location    :**',d[key])
              result2=predictimage_1(uploaded_file, model_location, threshold)
              pred_labels_1 = np.argmax(result2, axis=1)
              d_1 = {0:'minor', 1:'moderate', 2:'severe'}
