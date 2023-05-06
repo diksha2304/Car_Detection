@@ -67,6 +67,7 @@ def main():
   uploaded_file = st.file_uploader('Upload an image', type=['jpg', 'jpeg', 'png'])
   if st.button('Predict'):
         progress_bar = st.progress(0)
+        st.image(uploaded_file)
         result = predict_image(uploaded_file, model, threshold)
          # Check if the prediction is above the threshold
         if result >= 0.5:
