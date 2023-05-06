@@ -67,28 +67,31 @@ def main():
   uploaded_file = st.file_uploader('Upload an image', type=['jpg', 'jpeg', 'png'])
   if st.button('Predict'):
         progress_bar = st.progress(0)
-        st.image(uploaded_file)
-        result = predict_image(uploaded_file, model, threshold)
-         # Check if the prediction is above the threshold
-        if result >= 0.5:
-            st.write("Are you sure that your car is damaged? Please submit another picture of the damage.")
-            st.write("Hint: Try zooming in/out, using a different angle or different lighting")    
-        else:
-            st.write('damaged')
-            st.write('Validation complete - proceed to location and severity determination')
-            result1=predictimage(uploaded_file, model_location, threshold)
-            pred_labels = np.argmax(result1, axis=1)
-            d = {0:'Front', 1:'Rear', 2:'Side'}
-            for key in d.keys():
-                if pred_labels[0] == key:
-                    st.write("Validating location of damage....Result:",d[key])
-            result2=predictimage_1(uploaded_file, model_location, threshold)
-            pred_labels_1 = np.argmax(result2, axis=1)
-            d_1 = {0:'minor', 1:'moderate', 2:'severe'}
-            for key in d_1.keys():
-                if pred_labels_1[0] == key:
-                    st.write("Validating severity of damage....Result:",d_1[key])
-            st.write("Severity assessment complete.")
+        col1, col2, col3 = st.columns(3)
+        with col2:
+            st.image(uploaded_file)
+            result = predict_image(uploaded_file, model, threshold)
+             # Check if the prediction is above the threshold
+            if result >= 0.5:
+                st.write("Are you sure that your car is damaged? Please submit another picture of the damage.")
+                st.write("Hint: Try zooming in/out, using a different angle or different lighting")    
+            else:
+                col4, col5, col6 = st.columns(3)
+                with col5:
+                    st.write('**Status :   ✅**')
+                    result1=predictimage(uploaded_file, model_location, threshold)
+                    pred_labels = np.argmax(result1, axis=1)
+                    d = {0:'Front', 1:'Rear', 2:'Side'}
+                    for key in d.keys():
+                        if pred_labels[0] == key:
+                            st.write(**'Location :   '**,d[key])
+                    result2=predictimage_1(uploaded_file, model_location, threshold)
+                    pred_labels_1 = np.argmax(result2, axis=1)
+                    d_1 = {0:'minor', 1:'moderate', 2:'severe'}
+                    for key in d_1.keys():
+                        if pred_labels_1[0] == key:
+                            st.write(**'Serverity   :'**,d_1[key])
+                    st.write(**"Severity assessment complete."**)
         progress_bar.progress(100)
   else:
     st.warning('Please upload an image.')
