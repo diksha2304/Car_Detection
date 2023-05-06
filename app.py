@@ -66,9 +66,7 @@ threshold = st.sidebar.slider('Threshold', 0.0, 1.0, 0.5, 0.01)
 def main():
   uploaded_file = st.file_uploader('Upload an image', type=['jpg', 'jpeg', 'png'])
   if st.button('Predict'):
-        progress_bar = st.progress(0)
-        col1, col2, col3 = st.columns(3)
-        with col2:
+            progress_bar = st.progress(0)
             st.image(uploaded_file)
             result = predict_image(uploaded_file, model, threshold)
              # Check if the prediction is above the threshold
@@ -76,8 +74,6 @@ def main():
                 st.write("Are you sure that your car is damaged? Please submit another picture of the damage.")
                 st.write("Hint: Try zooming in/out, using a different angle or different lighting")    
             else:
-                col4, col5, col6 = st.columns(3)
-                with col5:
                     st.write('**Status :   ✅**')
                     result1=predictimage(uploaded_file, model_location, threshold)
                     pred_labels = np.argmax(result1, axis=1)
