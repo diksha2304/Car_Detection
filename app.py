@@ -84,13 +84,13 @@ def main():
                     d = {0:'Front', 1:'Rear', 2:'Side'}
                     for key in d.keys():
                         if pred_labels[0] == key:
-                            st.write(**'Location :   '**,d[key])
+                            st.write('**Location :   **',d[key])
                     result2=predictimage_1(uploaded_file, model_location, threshold)
                     pred_labels_1 = np.argmax(result2, axis=1)
                     d_1 = {0:'minor', 1:'moderate', 2:'severe'}
                     for key in d_1.keys():
                         if pred_labels_1[0] == key:
-                            st.write(**'Serverity   :'**,d_1[key])
+                            st.write('**Serverity   :**',d_1[key])
                     st.write(**"Severity assessment complete."**)
         progress_bar.progress(100)
   else:
